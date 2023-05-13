@@ -14,5 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
+
+Auth::routes();
+
+//Register User
+Route::post('/register',[\App\Http\Controllers\AuthController::class,'register'])->name('registerPost');
+
+//Halaman Home
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
