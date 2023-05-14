@@ -18,10 +18,10 @@ Route::post('login', [App\Http\Controllers\Api\ApiController::class, 'login']);
 Route::post('register', [App\Http\Controllers\Api\ApiController::class, 'register']);
 
 
-//Route::middleware('auth:sanctum')->group(function () {
-//
-//});
-Route::get('/dashboard', [\App\Http\Controllers\KendaraanController::class, 'dashboard']);
+Route::middleware('auth:api')->group(function () {
+    Route::get('/dashboard', [\App\Http\Controllers\KendaraanController::class, 'dashboard']);
+
+});
 
 Route::get('index-mobil', [App\Http\Controllers\KendaraanController::class, 'indexMobil']);
 Route::post('store-mobil', [App\Http\Controllers\KendaraanController::class, 'storeMobil']);
