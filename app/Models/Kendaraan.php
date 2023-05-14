@@ -10,7 +10,7 @@ class Kendaraan extends Eloquent
 
     use HasFactory;
     protected $collection = "kendaraans";
-    protected $fillable = ["tahun_keluaran", "warna", "harga"];
+    protected $fillable = ["tahun_keluaran", "warna", "harga","status","jenis"];
     protected $connection = 'mongodb';
 
     public function mobil()

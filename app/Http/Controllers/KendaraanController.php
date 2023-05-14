@@ -6,6 +6,7 @@ use App\Models\Kendaraan;
 use App\Models\Mobil;
 use App\Models\Motor;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class KendaraanController extends Controller
 {
@@ -14,16 +15,53 @@ class KendaraanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function dashboard()
+    {
+        $mobil = Kendaraan::with('mobil')->where('jenis','mobil')->get();
+        $motor = Kendaraan::with('motor')->where('jenis','motor')->get();
+
+        $allmobil = count($mobil);
+
+        $allmobilsold = count($mobil->where('status','terjual'));
+        $allmobilready = count($mobil->where('status','terjual'));
+
+        $allmotor = count($motor);
+        $allmotorsold = count($motor->where('status','terjual'));
+        $allmotorready = count($motor->where('status','terjual'));
+
+        $data = [
+            'Jumlah Semua mobil' => $allmobil,
+            'Jumlah Semua Mobil Terjual' => $allmobilsold,
+            'Jumlah Mobil Ready' => $allmobilready,
+
+            'Jumlah Semua Motor' => $allmotor,
+            'Jumlah Semua Motor Terjual' => $allmotorsold,
+            'Jumlah Semua Motor Ready' => $allmotorready,
+
+            'Jumlah Semua Kendaraan' => $allmobil + $allmotor,
+            'Jumlah Kendaraan Terjual' => $allmobilsold + $allmotorsold,
+            'Jumlah Kendaraan Ready' => $allmobilready + $allmotorready,
+        ];
+        $response = [
+            'message' => 'Stok',
+            'data' => $data
+        ];
+        // dd($data);
+
+        return response()->json($response, Response::HTTP_OK);
+    }
+
     public function indexMotor()
     {
-        $data = Kendaraan::join('motors','motors.kendaraan_id','kendaraans.id')
-            ->select('kendaraans.*','motors.mesin','motors.tipe_suspensi','motors.transmisi')->get();
+        $data = Kendaraan::with('mobil')->where('jenis','motor')->get();
+
 
         return response()->json(['data' => $data]);
     }
     public function indexMobil()
     {
-        $data = Kendaraan::with('mobil')->get();
+        $data = Kendaraan::with('mobil')->where('jenis','mobil')->get();
 
         return response()->json(['data' => $data]);
 
@@ -51,6 +89,8 @@ class KendaraanController extends Controller
             'tahun_keluaran' => $request->tahun_keluaran,
             'warna' => $request->warna,
             'harga' => $request->harga,
+            'status' => $request->status,
+            'jenis' => $request->jenis,
         ]);
 
         // Membuat mobil baru dan mengaitkannya dengan kendaraan
@@ -71,6 +111,8 @@ class KendaraanController extends Controller
             'tahun_keluaran' => $request->tahun_keluaran,
             'warna' => $request->warna,
             'harga' => $request->harga,
+            'status' => $request->status,
+            'jenis' => $request->jenis,
         ]);
 //
         $motor = Motor::create([
@@ -134,6 +176,7 @@ class KendaraanController extends Controller
         $kendaraan->tahun_keluaran = $request->input('tahun_keluaran');
         $kendaraan->warna = $request->input('warna');
         $kendaraan->harga = $request->input('harga');
+        $kendaraan->status = $request->input('status');
 
         $mobil->mesin = $request->input('mesin');
         $mobil->kapasitas_penumpang = $request->input('kapasitas_penumpang');
@@ -156,6 +199,7 @@ class KendaraanController extends Controller
         $kendaraan->tahun_keluaran = $request->input('tahun_keluaran');
         $kendaraan->warna = $request->input('warna');
         $kendaraan->harga = $request->input('harga');
+        $kendaraan->status = $request->input('status');
 
         $motor->mesin = $request->input('mesin');
         $motor->tipe_suspensi = $request->input('tipe_suspensi');

@@ -18,6 +18,8 @@ class CreateKendaraansTable extends Migration
             $table->integer('tahun_keluaran');
             $table->string('warna');
             $table->integer('harga');
+            $table->string('status');
+            $table->string('jenis')->nullable();
             $table->timestamps();
         });
     }

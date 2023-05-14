@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', [App\Http\Controllers\Api\ApiController::class, 'login']);
 Route::post('register', [App\Http\Controllers\Api\ApiController::class, 'register']);
 
+
+//Route::middleware('auth:sanctum')->group(function () {
+//
+//});
 Route::get('/dashboard', [\App\Http\Controllers\KendaraanController::class, 'dashboard']);
 
 Route::get('index-mobil', [App\Http\Controllers\KendaraanController::class, 'indexMobil']);
@@ -31,7 +35,3 @@ Route::get('show-motor/{id}', [App\Http\Controllers\KendaraanController::class, 
 Route::get('edit-motor/{id}', [App\Http\Controllers\KendaraanController::class, 'editMotor']);
 Route::put('update-motor/{id}', [App\Http\Controllers\KendaraanController::class, 'updateMotor']);
 
-
-//Route::middleware('auth:sanctum')->group(function () {
-//
-//});
