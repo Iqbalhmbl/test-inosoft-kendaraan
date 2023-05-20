@@ -1,4 +1,4 @@
-## Instalasi Program 
+## Instalasi Program Laravel & MongoDB
 
 -clone repository ini terlebih dahulu <br />
 -setting env untuk menyesuaikan mongodb <br />
