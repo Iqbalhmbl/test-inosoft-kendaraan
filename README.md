@@ -1,7 +1,9 @@
 ## Instalasi Program Laravel & MongoDB
 
--clone repository ini terlebih dahulu <br />
--setting env untuk menyesuaikan mongodb <br />
--lakukan composer update <br />
--run dengan php artisan serve <br />
--akses di web 127.0.0.1:8000/dashboard <br />
+- Clone repository ini dengan cara " git clone https://github.com/Iqbalhmbl/test-inosoft-kendaraan.git "<br />
+- Selanjutnya ketik " composer update " <br />
+- Setting .ENV <br />
+- Run program dengan php artisan serve <br />
+- API Register : http://127.0.0.1:8000/api/register?email=iqbal@gmail.com&password=123123123&name=iqbal <br />
+- API Login : http://127.0.0.1:8000/api/login?email=iqbal@gmail.com&password=123123123 <br />
+- API Dashboard : http://127.0.0.1:8000/api/dashboard <br />
